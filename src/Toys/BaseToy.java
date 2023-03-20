@@ -1,16 +1,13 @@
 package Toys;
 
 public class BaseToy {
-    private Integer toyId;
+    private Integer toyId = -1;
     private String name;
-    private Integer count;
-    private Integer rarity;
+    private Integer count = 0;
+    private Integer rarity = 0;
 
     public BaseToy(String toyName) {
         this.name = toyName;
-        this.toyId = -1;
-        this.count = 0;
-        this.rarity = 0;
     }
 
     public void setId(Integer toyId) {
