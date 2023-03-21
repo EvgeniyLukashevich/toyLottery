@@ -2,20 +2,76 @@ package MVP.View;
 
 public abstract class View {
 
-    protected String mainMenu() {
-            return """
-                        
-            1: Добавить Игрушку
-            2: Изменить количество игрушек
-            3: Провести розыгрыш
-            4: Выдать Игрушку
-            0: Выход
-            
-            Выберите пункт меню:             
-            """;
+    protected String firstMessage() {
+        return "### МЫ В ГЛАВНОМ МЕНЮ ###\n";
     }
 
 
-    public abstract void showMainMenu();
-    public abstract String userInput();
+    protected String mainMenu() {
+        return """
+                1: Добавить Игрушку
+                2: Изменить количество игрушек
+                3: Провести розыгрыш
+                4: Выдать Игрушку
+                5: Посмотреть список игрушек
+                6: Посмотреть список участников
+                0: Выход
+                            
+                Выберите пункт меню:""";
+    }
+
+
+    // Добавить игрушку
+    protected String addToyName() {
+        return "Введите название игрушки: ";
+    }
+
+    protected String addToyCount() {
+        return "Введите количество: ";
+    }
+
+    protected String addToyRarity() {
+        return "Выберите ценность игрушки: \n" +
+                "1 - ценная\n" +
+                "2 - раритет\n" +
+                "3 - антиквариат\n";
+    }
+
+    protected String addToyFinal() {
+        return "Игрушка успешно добавлена!\n";
+    }
+
+
+    // Изменить количество
+    protected String changeCountFirst() {
+        return "Введите id игрушки, количество которой хотите изменить: ";
+    }
+
+    protected String changeCountSecond() {
+        return "Введите нужное количество: ";
+    }
+
+    protected String changeCountFinal() {
+        return "Количество успешно изменено!\n";
+    }
+
+
+    // Розыгрыш
+    protected String lotteryFirst() {
+        return "Введите имя участника розыгрыша: ";
+    }
+
+
+
+    // Список игрушек, участников
+    protected String Separator(){
+        return "\n#$#$#$#$#$#$#$#$#$##$#$#$#$#$#$#$#$#$##$#$#$#$#$#$#$#$#$#\n";
+    }
+
+    // Ошибка ввода
+    protected String inputError() {
+        return "Ошибка ввода";
+    }
+
+
 }
