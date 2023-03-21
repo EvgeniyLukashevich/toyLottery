@@ -63,6 +63,12 @@ public class ViewConsole extends View {
     public void showLotteryFirst() {
         System.out.println(super.lotteryFirst());
     }
+    public void showLotterySecond(){
+        System.out.println(super.lotterySecond());
+    }
+    public void showLotteryFinal(String winnerName, String toyName){
+        System.out.println(super.lotteryFinal(winnerName,toyName));
+    }
 
 
 

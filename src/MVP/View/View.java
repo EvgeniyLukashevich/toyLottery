@@ -1,5 +1,7 @@
 package MVP.View;
 
+import Toys.BaseToy;
+
 public abstract class View {
 
     protected String firstMessage() {
@@ -60,7 +62,12 @@ public abstract class View {
     protected String lotteryFirst() {
         return "Введите имя участника розыгрыша: ";
     }
-
+    protected String lotterySecond(){
+        return "Отсутстыуют игрушки, подходящие для розыгрыша!\n";
+    }
+    protected String lotteryFinal(String winnerName, String toyName){
+        return "# # # # # # #\n"+winnerName + " выиграл(-а) игрушку " + toyName +"!!!\n# # # # # # #"+ "\n";
+    }
 
 
     // Список игрушек, участников
@@ -68,10 +75,12 @@ public abstract class View {
         return "\n#$#$#$#$#$#$#$#$#$##$#$#$#$#$#$#$#$#$##$#$#$#$#$#$#$#$#$#\n";
     }
 
+
     // Ошибка ввода
     protected String inputError() {
         return "Ошибка ввода";
     }
+
 
 
 }

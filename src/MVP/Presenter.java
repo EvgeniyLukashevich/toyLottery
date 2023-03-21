@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 public class Presenter {
     String welcomeMessage = "Добро пожаловать!\n";
+
     public Presenter() {
         System.out.println(this.welcomeMessage);
     }
@@ -32,10 +33,8 @@ public class Presenter {
 
             // Добавить игрушку
             if (mainInput.equals("1")) {
-                // Название игрушки
                 view.showAddToyName();
                 String toyName = view.userInput();
-                // Количество
                 view.showAddToyCount();
                 String toyCount = view.userInput();
                 boolean check = model.addToyCheckCount(toyCount);
@@ -45,7 +44,6 @@ public class Presenter {
                     toyCount = view.userInput();
                     check = model.addToyCheckCount(toyCount);
                 }
-                // Ценность
                 view.showAddToyRarity();
                 String toyRarity = view.userInput();
                 check = model.addToyCheckRarity(toyRarity);
@@ -55,9 +53,7 @@ public class Presenter {
                     toyRarity = view.userInput();
                     check = model.addToyCheckRarity(toyRarity);
                 }
-                // ID
                 Integer toyId = model.offerToyId(toyList);
-                // Сборка
                 BaseToy toy = new BaseToy(toyName);
                 toy.setId(toyId);
                 toy.setCount(Integer.parseInt(toyCount));
@@ -89,8 +85,8 @@ public class Presenter {
                     check = model.addToyCheckCount(newCount);
                 }
                 int i = 0;
-                for (BaseToy toy:toyList){
-                    if (toy.getId().equals(Integer.parseInt(toyId))){
+                for (BaseToy toy : toyList) {
+                    if (toy.getId().equals(Integer.parseInt(toyId))) {
                         toyList.get(i).setCount(Integer.parseInt(newCount));
                         break;
                     }
@@ -104,11 +100,33 @@ public class Presenter {
             else if (mainInput.equals("3")) {
                 view.showLotteryFirst();
                 String name = view.userInput();
-
+                if (model.lottery(toyList) == null) {
+                    view.showLotterySecond();
+                } else {
+                    BaseToy userToy = model.lottery(toyList);
+                    int i = 0;
+                    for (BaseToy toy : toyList) {
+                        if (toy.getId().equals(userToy.getId())) {
+                            toyList.get(i).setCount(toy.getCount() - 1);
+                            break;
+                        }
+                        i++;
+                    }
+                    Integer winnerId = model.offerWinnerId(winnerList);
+                    Winner winner = new Winner(name);
+                    winner.setId(winnerId);
+                    winner.setToy(userToy);
+                    winner.setStatus(false);
+                    winnerList.add(winner);
+                    dataIn.writeToys(toyList);
+                    dataIn.writeWinners(winnerList);
+                    view.showLotteryFinal(name, userToy.getName());
+                }
             }
 
             // Выдать игрушку
             else if (mainInput.equals("4")) {
+
 
             }
 
@@ -129,7 +147,7 @@ public class Presenter {
                 stop = true;
             }
 
-            // Ошибка ввода
+            // Ошибка ввода в главном меню
             else {
                 view.showInputError();
             }

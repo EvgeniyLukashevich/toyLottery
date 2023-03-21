@@ -1,8 +1,10 @@
 package MVP;
 
 import Toys.BaseToy;
+import Winners.Winner;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Model {
     public Model() {
@@ -71,4 +73,61 @@ public class Model {
         return false;
     }
 
+    // Розыгрыш
+    public BaseToy lottery(ArrayList<BaseToy> toyList) {
+        ArrayList<Integer> chanceList = new ArrayList<Integer>();
+        Random random = new Random();
+        ArrayList<BaseToy> firstRarityToys = new ArrayList<BaseToy>();
+        ArrayList<BaseToy> secondRarityToys = new ArrayList<BaseToy>();
+        ArrayList<BaseToy> thirdRarityToys = new ArrayList<BaseToy>();
+
+        for (BaseToy toy : toyList) {
+            if (toy.getRarity().equals(1) && toy.getCount() > 0) {
+                firstRarityToys.add(toy);
+            } else if (toy.getRarity().equals(2) && toy.getCount() > 0) {
+                secondRarityToys.add(toy);
+            } else if (toy.getRarity().equals(3) && toy.getCount() > 0) {
+                thirdRarityToys.add(toy);
+            }
+        }
+        if (firstRarityToys.isEmpty() &&
+                secondRarityToys.isEmpty() &&
+                thirdRarityToys.isEmpty()) {
+            return null;
+        }
+        if (!firstRarityToys.isEmpty()) {
+            chanceList.add(1);
+            chanceList.add(1);
+            chanceList.add(1);
+        }
+        if (!secondRarityToys.isEmpty()) {
+            chanceList.add(2);
+            chanceList.add(2);
+        }
+        if (!thirdRarityToys.isEmpty()) {
+            chanceList.add(3);
+        }
+        Integer rarity = chanceList.get(random.nextInt(chanceList.size()));
+        BaseToy toy = new BaseToy("Утешительная игрушка");
+        if (rarity.equals(3)){
+            int index = random.nextInt(thirdRarityToys.size());
+            toy = thirdRarityToys.get(index);
+        } else if (rarity.equals(2)) {
+            int index = random.nextInt(secondRarityToys.size());
+            toy = secondRarityToys.get(index);
+        } else {
+            int index = random.nextInt(firstRarityToys.size());
+            toy = firstRarityToys.get(index);
+        }
+        return toy;
+    }
+
+    public Integer offerWinnerId(ArrayList<Winner> winnerList) {
+        if (winnerList.isEmpty()) {
+            return 1;
+        } else {
+            Winner lastWinner = winnerList.get(winnerList.size() - 1);
+            return lastWinner.getId() + 1;
+        }
+    }
 }
