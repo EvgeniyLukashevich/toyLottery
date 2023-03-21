@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 public class ViewConsole extends View {
 
-
     public ViewConsole() {
         this.showFirstMessage();
     }
@@ -63,17 +62,32 @@ public class ViewConsole extends View {
     public void showLotteryFirst() {
         System.out.println(super.lotteryFirst());
     }
-    public void showLotterySecond(){
+
+    public void showLotterySecond() {
         System.out.println(super.lotterySecond());
     }
-    public void showLotteryFinal(String winnerName, String toyName){
-        System.out.println(super.lotteryFinal(winnerName,toyName));
+
+    public void showLotteryFinal(String winnerName, String toyName) {
+        System.out.println(super.lotteryFinal(winnerName, toyName));
     }
 
+
+    // Выдача игрушек
+    public void showWinners(String winnersString) {
+        System.out.println(winnersString);
+    }
+
+    public void showReleaseFirst() {
+        System.out.println(super.releaseFirst());
+    }
+
+    public void showReleaseFinal(String winnerName, String toyName) {
+        System.out.println(super.releaseFinal(winnerName, toyName));
+    }
 
 
     // Посмотреть игрушки, участников
-    public void showSeparator(){
+    public void showSeparator() {
         System.out.println(super.Separator());
     }
 

@@ -8,7 +8,6 @@ public abstract class View {
         return "### МЫ В ГЛАВНОМ МЕНЮ ###\n";
     }
 
-
     protected String mainMenu() {
         return """
                 1: Добавить Игрушку
@@ -62,16 +61,28 @@ public abstract class View {
     protected String lotteryFirst() {
         return "Введите имя участника розыгрыша: ";
     }
-    protected String lotterySecond(){
+
+    protected String lotterySecond() {
         return "Отсутстыуют игрушки, подходящие для розыгрыша!\n";
     }
-    protected String lotteryFinal(String winnerName, String toyName){
-        return "# # # # # # #\n"+winnerName + " выиграл(-а) игрушку " + toyName +"!!!\n# # # # # # #"+ "\n";
+
+    protected String lotteryFinal(String winnerName, String toyName) {
+        return "# # # # # # #\n" + winnerName + " выиграл(-а) игрушку " + toyName + "!!!\n# # # # # # #" + "\n";
+    }
+
+
+    // Выдача игрушек
+    protected String releaseFirst() {
+        return "Введите id участника, которому необходимо выдать игрушку: ";
+    }
+
+    protected String releaseFinal(String winnerName, String toyName) {
+        return "# # # # # # #\n" + winnerName + " получил(-а) игрушку " + toyName + "!!!\n# # # # # # #" + "\n";
     }
 
 
     // Список игрушек, участников
-    protected String Separator(){
+    protected String Separator() {
         return "\n#$#$#$#$#$#$#$#$#$##$#$#$#$#$#$#$#$#$##$#$#$#$#$#$#$#$#$#\n";
     }
 
@@ -80,7 +91,6 @@ public abstract class View {
     protected String inputError() {
         return "Ошибка ввода";
     }
-
 
 
 }

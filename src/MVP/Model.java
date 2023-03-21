@@ -73,6 +73,7 @@ public class Model {
         return false;
     }
 
+
     // Розыгрыш
     public BaseToy lottery(ArrayList<BaseToy> toyList) {
         ArrayList<Integer> chanceList = new ArrayList<Integer>();
@@ -109,7 +110,7 @@ public class Model {
         }
         Integer rarity = chanceList.get(random.nextInt(chanceList.size()));
         BaseToy toy = new BaseToy("Утешительная игрушка");
-        if (rarity.equals(3)){
+        if (rarity.equals(3)) {
             int index = random.nextInt(thirdRarityToys.size());
             toy = thirdRarityToys.get(index);
         } else if (rarity.equals(2)) {
@@ -129,5 +130,47 @@ public class Model {
             Winner lastWinner = winnerList.get(winnerList.size() - 1);
             return lastWinner.getId() + 1;
         }
+    }
+
+
+    // Выдача игручшки
+    public ArrayList<Winner> winnersWithoutToy(ArrayList<Winner> winnerList) {
+        ArrayList<Winner> newWinnerList = new ArrayList<Winner>();
+        for (Winner winner : winnerList) {
+            if (winner.getStatus().equals(false)) {
+                newWinnerList.add(winner);
+            }
+        }
+        return newWinnerList;
+    }
+
+    public boolean checkWinnerId(String userInput, ArrayList<Winner> winnerList) {
+        try {
+            int id = Integer.parseInt(userInput);
+            for (int i = 0; i < winnerList.size(); i++) {
+                Winner winner = winnerList.get(i);
+                if (id == winner.getId()) {
+                    return true;
+                }
+            }
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        return false;
+    }
+
+    public String winnersString(ArrayList<Winner> winnerList) {
+        StringBuilder text = new StringBuilder();
+        for (Winner winner : winnerList) {
+            text.append("id: ").append(winner.getId()).append("\n")
+                    .append("Имя: ").append(winner.getName()).append("\n")
+                    .append("Игрушка: ").append(winner.getToy().getName()).append("\n");
+            if (winner.getStatus().equals(true)) {
+                text.append("Статус: ").append("игрушка ВЫДАНА").append("\n\n");
+            } else {
+                text.append("Статус: ").append("игрушка НЕ ВЫДАНА").append("\n\n");
+            }
+        }
+        return text.toString();
     }
 }

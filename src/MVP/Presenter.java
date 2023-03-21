@@ -126,8 +126,28 @@ public class Presenter {
 
             // Выдать игрушку
             else if (mainInput.equals("4")) {
-
-
+                ArrayList<Winner> winnersWithoutToys = model.winnersWithoutToy(winnerList);
+                view.showWinners(model.winnersString(winnersWithoutToys));
+                view.showReleaseFirst();
+                String winnerId = view.userInput();
+                boolean check = model.checkWinnerId(winnerId, winnersWithoutToys);
+                while (!check) {
+                    view.showInputError();
+                    view.showReleaseFirst();
+                    winnerId = view.userInput();
+                    check = model.checkWinnerId(winnerId, winnerList);
+                }
+                int i = 0;
+                for (Winner winner : winnerList) {
+                    if (winner.getId() == Integer.parseInt(winnerId)) {
+                        winnerList.get(i).setStatus(true);
+                        break;
+                    }
+                    i++;
+                }
+                dataIn.writeWinners(winnerList);
+                view.showReleaseFinal(winnerList.get(i).getName(),
+                        winnerList.get(i).getToy().getName());
             }
 
             // Показать игрушки
@@ -139,7 +159,9 @@ public class Presenter {
 
             // Показать участников
             else if (mainInput.equals("6")) {
-
+                view.showSeparator();
+                view.showWinners(model.winnersString(winnerList));
+                view.showSeparator();
             }
 
             // Выход
@@ -151,12 +173,6 @@ public class Presenter {
             else {
                 view.showInputError();
             }
-
         }
-    }
-
-    public static void main(String[] args) throws IOException {
-        Presenter presenter = new Presenter();
-        presenter.start();
     }
 }

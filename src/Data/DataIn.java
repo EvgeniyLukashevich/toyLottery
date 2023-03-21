@@ -10,9 +10,10 @@ import java.util.ArrayList;
 
 public class DataIn extends Data {
 
-    public DataIn(){
+    public DataIn() {
         new Data();
     }
+
     @Override
     public void writeToys(ArrayList<BaseToy> toyList) throws IOException {
         File file = new File(super.toysPath);
@@ -27,6 +28,7 @@ public class DataIn extends Data {
         writer.write(text.toString());
         writer.close();
     }
+
     @Override
     public void writeWinners(ArrayList<Winner> winnerList) throws IOException {
         File file = new File(this.winnersPath);
@@ -42,34 +44,4 @@ public class DataIn extends Data {
         writer.close();
 
     }
-
-    public static void main(String[] args) throws IOException {
-
-        Data dataOut = new DataOut();
-        Data dataIn = new DataIn();
-        ArrayList<BaseToy> toyList = dataOut.readToys();
-        ArrayList<Winner> winnerList = dataOut.readWinners();
-
-        BaseToy toy1 = new BaseToy("cat");
-        toy1.setId(1);
-        toy1.setCount(5);
-        toy1.setRarity(3);
-
-        BaseToy toy2 = new BaseToy("wolf");
-        toy2.setId(2);
-        toy2.setCount(14);
-        toy2.setRarity(2);
-
-        toyList.add(toy1);
-        toyList.add(toy2);
-
-
-        dataIn.writeToys(toyList);
-        Winner w1 = new Winner("Petya");
-        w1.setId(1);
-        w1.setToy(toy2);
-        winnerList.add(w1);
-        dataIn.writeWinners(winnerList);
-    }
-
 }

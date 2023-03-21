@@ -10,7 +10,6 @@ public class Winner {
     // false - игрушка не выдана; true - игрушка выдана
     private Boolean winnerStatus = false;
 
-
     public Winner(String winnerName) {
         this.winnerName = winnerName;
     }
